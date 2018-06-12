@@ -32,3 +32,32 @@ require.or.install.packages <- function(list.of.packages) {
 
     }
 ## require.or.install.packages( c("Matrix", "data.table", "xgboost", "lightgbm", "vcd", "ggplot2", "scales", "GGally") )
+
+
+## Attempt to automatically download the data file if it is not present.
+try.download.file.unless.it.exists <- function(data_url, filename) {
+    if( !file.exists(filename)) {
+        try(download.file(data_url, filename))
+    }
+}
+## Usage: try.download.file.unless.it.exists( "your url goes here", "iris.csv")
+
+
+unzip.file.unless.target.exists <- function(filename_zipped, filename_unzipped) {
+    ## Unzip the file, if necessary
+    if( !file.exists(filename_unzipped)) {
+        try(unzip(filename_zipped,, filename_unzipped))
+    }
+}
+
+
+stop.if.file.isnt.there <- function(filename) {
+    if( !file.exists(filename)) {
+        stop(paste("File", filename,
+                   "not found! Please place file", filename,
+                   "in the current directory before running this program."))
+    }
+}
+
+
+

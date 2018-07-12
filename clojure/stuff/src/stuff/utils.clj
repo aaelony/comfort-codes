@@ -20,6 +20,18 @@
                         (x/into {}))) ;xform
         coll))
 
+
+(defn read-data
+  "In: Filename, delimiter.
+   Out: Sequence of clojure maps, using the first line of the file
+       the header for the names of the keys."
+ [filename sep]
+ (with-open [r (io/reader filename)]
+   (let [[headers & lines] (->> r line-seq (map #(str/split % (re-pattern sep))))]
+     (doall (map #(zipmap (map keyword headers) %)
+                 lines)))))
+
+
 (defn delimited-gz-file
   "Output a gzip compressed, delimited file."
   [delimiter out-filename records & field-order]
@@ -115,3 +127,5 @@
 ;; (incanter.core/dim data6)
 
  )
+
+

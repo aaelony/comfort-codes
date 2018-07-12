@@ -30,8 +30,16 @@ require.or.install.packages <- function(list.of.packages) {
     ## Load R package dependencies into the current namespace.
     sapply(list.of.packages, require, character.only=T)
 
-    }
-## require.or.install.packages( c("Matrix", "data.table", "xgboost", "lightgbm", "vcd", "ggplot2", "scales", "GGally") )
+}
+
+favorite_libraries <- c("Matrix", "data.table", "randomForest", "xgboost", "xgboostExplainer", "lightgbm",
+                        "vcd", "ggplot2", "scales", "GGally",
+                        "mlr", "mlrMBO", "irace",
+                        "rstanarm", "rstan",
+                        "h2o", "caret", "prophet", "lubridate",
+                        "future.apply", "future.callr", "DALEX"
+                        )
+## require.or.install.packages(favorite_libraries  )
 
 
 ## Attempt to automatically download the data file if it is not present.
